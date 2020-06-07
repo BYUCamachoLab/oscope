@@ -1,6 +1,9 @@
-# ---------------------------------------------------------------------------- #
-# Parameters
-# ---------------------------------------------------------------------------- #
+"""Settings for the experiment.
+
+This file contains the settings that are used in the experiment.
+All variables are imported into main.
+
+"""
 #Laser Sweep
 lambda_start    = 1550
 lambda_stop     = 1630
