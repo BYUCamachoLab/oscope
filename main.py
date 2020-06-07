@@ -132,8 +132,12 @@ if take_screenshot:
     scope.take_screenshot(folderName + "screenshot.png")
 
 #Acquire Data
-rawData = [None] #Ugly hack to make the numbers line up nicely.
-rawData[1:] = [scope.get_data_ascii(channel) for channel in active_channels]
+#HACK: In the future, build a class to hold the data instead.
+rawData = [None, None, None, None, None] #Ugly hack to make the numbers line up nicely.
+for channel in active_channels:
+    rawData[channel] = scope.get_data_ascii(channel)
+
+
 wavelengthLog = laser.wavelength_logging()
 wavelengthLogSize = laser.wavelength_logging_number()
 
@@ -161,11 +165,10 @@ print("Expected number of wavelength points: " + str(int(wavelengthLogSize)))
 print("Measured number of wavelength points: " + str(analysis.num_peaks()))
 print('=' * 30)
 
-data = [None] #Really ugly hack to make index numbers line up.
-data[1:] = [
-    #List comprehension to put all the datasets in this one array.
-    analysis.process_data(rawData[channel]) for channel in active_channels
-]
+#HACK: In the future, build a class to hold the data instead.
+data = [None, None, None, None, None] #Really ugly hack to make index numbers line up.
+for channel in active_channels:
+    data[channel] = analysis.process_data(rawData[channel])
 
 print("Raw Datasets: {}".format(len(rawData)))
 print("Datasets Returned: {}".format((len(data))))
