@@ -1,37 +1,4 @@
-# ---------------------------------------------------------------------------- #
-# Parameters
-# ---------------------------------------------------------------------------- #
-#Laser Sweep
-lambda_start    = 1550
-lambda_stop     = 1630
-duration        = 15
-trigger_step    = 0.01
-power_dBm       = 12
-#Data Collection
-sample_rate     = 10e09
-buffer          = 2 #Additional time around duration to prevent timeout.
-
-#Save Data
-#The first argument passed will be used as the file name.
-filename_prefix = ""
-filename_suffix = "data_now"
-data_directory  = "measurements/"
-append_date     = True #Appends date to the beginning of the directory.
-save_raw_data   = True #Save raw data collected from devices.
-
-#Oscilloscope
-scope_IP        = "10.32.112.140" #Oscilloscope IP Address
-take_screenshot = True
-active_channels = [1,2,3] #Channels to activate and use.
-trigger_channel = 1 #Channel for trigger signal.
-trigger_level   = 1 #Voltage threshold for postitive slope edge trigger.
-channel_setting = {
-    #Additional settings to pass to each channel if used.
-    1: {"range": 10}, 
-    2: {"range": 0.85, "position": -2},
-    3: {"range": 0.24, "position": -4.2},
-    4: {"range": 0.5}
-}
+from settings import *
 
 # ---------------------------------------------------------------------------- #
 # Libraries
@@ -165,8 +132,12 @@ if take_screenshot:
     scope.take_screenshot(folderName + "screenshot.png")
 
 #Acquire Data
-rawData = [None] #Ugly hack to make the numbers line up nicely.
-rawData[1:] = [scope.get_data_ascii(channel) for channel in active_channels]
+#HACK: In the future, build a class to hold the data instead.
+rawData = [None, None, None, None, None] #Ugly hack to make the numbers line up nicely.
+for channel in active_channels:
+    rawData[channel] = scope.get_data_ascii(channel)
+
+
 wavelengthLog = laser.wavelength_logging()
 wavelengthLogSize = laser.wavelength_logging_number()
 
@@ -194,11 +165,10 @@ print("Expected number of wavelength points: " + str(int(wavelengthLogSize)))
 print("Measured number of wavelength points: " + str(analysis.num_peaks()))
 print('=' * 30)
 
-data = [None] #Really ugly hack to make index numbers line up.
-data[1:] = [
-    #List comprehension to put all the datasets in this one array.
-    analysis.process_data(rawData[channel]) for channel in active_channels
-]
+#HACK: In the future, build a class to hold the data instead.
+data = [None, None, None, None, None] #Really ugly hack to make index numbers line up.
+for channel in active_channels:
+    data[channel] = analysis.process_data(rawData[channel])
 
 print("Raw Datasets: {}".format(len(rawData)))
 print("Datasets Returned: {}".format((len(data))))
