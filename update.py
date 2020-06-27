@@ -6,15 +6,6 @@ it will overwrite any local changes to repository.
 
 """
 
-# git status -uno
-# This will tell you if you're up to date with the branch or not.
-# ---------- OUTPUT ----------
-# On branch updater-git
-# Your branch is up to date with 'origin/updater-git'.
-# 
-# nothing to commit (use -u to show untracked files)
-# 
-# ---------- END OUTPUT ----------
 from subprocess import run as shell
 
 def update(branch = "master"):
