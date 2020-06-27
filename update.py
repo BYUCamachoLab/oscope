@@ -14,9 +14,13 @@ from subprocess import run as shell
 # ---------- END OUTPUT ----------
 
 def update(branch = "master"):
+    # Use git to update:
+    # git fetch
+    # git reset --hard origin/{branch}
+    # git submodule foreach --recursive git reset --hard
     shell(["git", "fetch"]) # Get changes.
     shell(["git", "reset", "--hard", f"origin/{branch}"]) # Forcibly update local repository with branch.
+    shell(["git", "submodule", "foreach", "--recursive", "git", "reset", "--hard"]) # Reset submodules as well.
 
 def check_for_updates():
     shell(["git", "remote", "update"])
-    output = shell("git", "status", "-uno").stdout
