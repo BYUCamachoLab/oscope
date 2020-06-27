@@ -1,7 +1,10 @@
-from subprocess import run as shell
+""" Updater script using git.
 
-# git remote update
-# I think this updates the tracking?
+This script calls git through the shell to do updates.
+This script is only meant to be used in actual deployments as
+it will overwrite any local changes to repository.
+
+"""
 
 # git status -uno
 # This will tell you if you're up to date with the branch or not.
@@ -12,6 +15,7 @@ from subprocess import run as shell
 # nothing to commit (use -u to show untracked files)
 # 
 # ---------- END OUTPUT ----------
+from subprocess import run as shell
 
 def update(branch = "master"):
     # Use git to update:
