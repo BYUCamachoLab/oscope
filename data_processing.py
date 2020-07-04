@@ -54,6 +54,7 @@ class WavelengthAnalyzer:
 # ---------------------------------------------------------------------------- #
 def VisualizeData(
         save_path,
+        filename,
         channel,
         wavelengths,
         data,
@@ -66,7 +67,7 @@ def VisualizeData(
     graph.ylabel("Power (au)")
     graph.grid(True)
     graph.tight_layout()
-    graph.savefig(save_path / "_Channel{}{}".format(channel, ".png"))
+    graph.savefig(save_path / f"{filename}_Channel{channel}.png")
     sio.savemat(
         save_path / "_Channel{}{}".format(channel, ".mat"),
         {
@@ -75,7 +76,7 @@ def VisualizeData(
         }
     )
     np.savez(
-        save_path / "_Channel{}{}".format(channel, ".npz"),
+        save_path / f"{filename}_Channel{channel}.npz",
         wavelength = np.squeeze(wavelengths),
         power = np.squeeze(data)
     )

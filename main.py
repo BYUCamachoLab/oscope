@@ -179,4 +179,4 @@ print("Datasets Returned: {}".format((len(data))))
 for channel in active_channels:
     if (channel != trigger_channel):
         print("Displaying data for channel " + str(channel))
-        VisualizeData(folderPath / filename, channel, **(data[channel]))
+        VisualizeData(folderPath, filename, channel, **(data[channel]))
