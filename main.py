@@ -51,7 +51,7 @@ print("Initializing devices.")
 #Initialize Laser
 print("Initializing laser.")
 laser = initLaser()
-isOn = laser.on()
+laser.on()
 laser.power_dBm(power_dBm)
 laser.openShutter()
 laser.sweep_set_mode(
