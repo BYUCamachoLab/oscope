@@ -3,6 +3,10 @@
 This file contains the settings that are used in the experiment.
 All variables are imported into main.
 
+Make sure this file is named "settings.py" so it will be imported.
+By default it should be named "settings.example.py" so as to not overwrite
+existing settings when updating.
+
 """
 #Laser Sweep
 lambda_start    = 1550
@@ -11,7 +15,7 @@ duration        = 15
 trigger_step    = 0.01
 power_dBm       = 12
 #Data Collection
-sample_rate     = 10e09
+sample_rate     = 1e09
 buffer          = 2 #Additional time around duration to prevent timeout.
 
 #Save Data

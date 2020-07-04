@@ -37,8 +37,8 @@ today = datetime.now()
 datePrefix = "{}_{}_{}_{}_{}_".format(today.year, today.month, today.day, today.hour, today.minute)
 prefix = datePrefix if append_date else ""
 folderName = prefix + data_directory
-folderPath = Path(Path.cwd(), folderName)
-print("Saving data to {} in current directory.".format(folderName))
+folderPath = Path(Path.cwd(), "DATA", folderName)
+print("Saving data to {} in current directory.".format(folderPath))
 if not os.path.exists(folderPath):
     print("Creating {} directory.".format(folderName))
     os.makedirs(folderPath)
@@ -51,7 +51,7 @@ print("Initializing devices.")
 #Initialize Laser
 print("Initializing laser.")
 laser = initLaser()
-isOn = laser.on()
+laser.on()
 laser.power_dBm(power_dBm)
 laser.openShutter()
 laser.sweep_set_mode(
@@ -129,7 +129,7 @@ print('Waiting for acquisition to complete.')
 scope.wait_for_device()
 #Take Screenshot
 if take_screenshot:
-    scope.take_screenshot(folderName + "screenshot.png")
+    scope.take_screenshot(folderPath / "screenshot.png")
 
 #Acquire Data
 #HACK: In the future, build a class to hold the data instead.
@@ -145,9 +145,9 @@ wavelengthLogSize = laser.wavelength_logging_number()
 if save_raw_data:
     print("Saving raw data.")
     for channel in active_channels:
-        with open(folderName + "CHAN{}_Raw.txt".format(channel), "w") as out:
+        with open(folderPath / "CHAN{}_Raw.txt".format(channel), "w") as out:
             out.write(str(rawData[channel]))
-    with open(folderName + "Wavelength_Log.txt", "w") as out:
+    with open(folderPath / "Wavelength_Log.txt", "w") as out:
         out.write(str(wavelengthLog))
 
 # ---------------------------------------------------------------------------- #
@@ -179,4 +179,4 @@ print("Datasets Returned: {}".format((len(data))))
 for channel in active_channels:
     if (channel != trigger_channel):
         print("Displaying data for channel " + str(channel))
-        VisualizeData(folderName + filename, channel, **(data[channel]))
+        VisualizeData(folderPath, filename, channel, **(data[channel]))
