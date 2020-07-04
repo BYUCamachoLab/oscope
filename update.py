@@ -25,3 +25,9 @@ def matches_repo(branch = "master"):
     print(f"Local Hash: {local_hash}")
     return (repo_hash == local_hash)
 
+if __name__ == "__main__":
+    # Run update when called directly.
+    branch = "development"
+    no_changes = matches_repo(branch)
+    if not no_changes:
+        update(branch)
