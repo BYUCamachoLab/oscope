@@ -9,10 +9,10 @@ it will overwrite any local changes to repository.
 from subprocess import run as shell
 
 def update(branch = "master"):
-    # Use git to update:
-    # git fetch
-    # git reset --hard origin/{branch}
-    # git submodule foreach --recursive git reset --hard
+    # Git commands to clean.
+    shell(["git", "clean", "-f", "-x", "-d", "-e", "settings.py", "-e", "DATA/"])
+    shell(["git", "submodule", "foreach", "git", "clean", "-f", "-x", "-d"])
+    # Git commands to update.
     shell(["git", "fetch"]) # Get changes.
     shell(["git", "reset", "--hard", f"origin/{branch}"]) # Forcibly update local repository with branch.
     shell(["git", "submodule", "foreach", "--recursive", "git", "reset", "--hard"]) # Reset submodules as well.
