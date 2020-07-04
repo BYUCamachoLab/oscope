@@ -37,7 +37,7 @@ today = datetime.now()
 datePrefix = "{}_{}_{}_{}_{}_".format(today.year, today.month, today.day, today.hour, today.minute)
 prefix = datePrefix if append_date else ""
 folderName = prefix + data_directory
-folderPath = Path(Path.cwd(), folderName)
+folderPath = Path(Path.cwd(), "DATA", folderName)
 print("Saving data to {} in current directory.".format(folderName))
 if not os.path.exists(folderPath):
     print("Creating {} directory.".format(folderName))
