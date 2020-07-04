@@ -129,7 +129,7 @@ print('Waiting for acquisition to complete.')
 scope.wait_for_device()
 #Take Screenshot
 if take_screenshot:
-    scope.take_screenshot(folderName + "screenshot.png")
+    scope.take_screenshot(folderPath / "screenshot.png")
 
 #Acquire Data
 #HACK: In the future, build a class to hold the data instead.
@@ -145,9 +145,9 @@ wavelengthLogSize = laser.wavelength_logging_number()
 if save_raw_data:
     print("Saving raw data.")
     for channel in active_channels:
-        with open(folderName + "CHAN{}_Raw.txt".format(channel), "w") as out:
+        with open(folderPath / "CHAN{}_Raw.txt".format(channel), "w") as out:
             out.write(str(rawData[channel]))
-    with open(folderName + "Wavelength_Log.txt", "w") as out:
+    with open(folderPath / "Wavelength_Log.txt", "w") as out:
         out.write(str(wavelengthLog))
 
 # ---------------------------------------------------------------------------- #
@@ -179,4 +179,4 @@ print("Datasets Returned: {}".format((len(data))))
 for channel in active_channels:
     if (channel != trigger_channel):
         print("Displaying data for channel " + str(channel))
-        VisualizeData(folderName + filename, channel, **(data[channel]))
+        VisualizeData(folderPath / filename, channel, **(data[channel]))
