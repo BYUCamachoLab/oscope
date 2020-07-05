@@ -27,7 +27,7 @@ def matches_repo(branch = "master"):
 
 if __name__ == "__main__":
     # Run update when called directly.
-    branch = "development"
+    branch = "master"
     no_changes = matches_repo(branch)
     if not no_changes:
         update(branch)
