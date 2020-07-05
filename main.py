@@ -22,7 +22,6 @@ from data_processing import WavelengthAnalyzer, VisualizeData
 print("Checking inputs.")
 #Get command line arguments.
 args = sys.argv[1:]
-filename = filename_prefix + sys.argv[0] + filename_suffix
 
 #Check laser settings.
 laser_sweep_rate = (lambda_stop - lambda_start) / duration
@@ -179,4 +178,4 @@ print("Datasets Returned: {}".format((len(data))))
 for channel in active_channels:
     if (channel != trigger_channel):
         print("Displaying data for channel " + str(channel))
-        VisualizeData(folderPath, filename, channel, **(data[channel]))
+        VisualizeData(folderPath, channel, **(data[channel]))
