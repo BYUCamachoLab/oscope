@@ -69,7 +69,7 @@ def VisualizeData(
     graph.tight_layout()
     graph.savefig(save_path / f"{filename}_Channel{channel}.png")
     sio.savemat(
-        save_path / "_Channel{}{}".format(channel, ".mat"),
+        save_path / f"{filename}_Channel{channel}.mat",
         {
             'wavelength': wavelengthHash,
             'power': dataHash
