@@ -1,0 +1,3 @@
+[submodule "TSL550"]
+	path = TSL550
+	url = https://github.com/BYUCamachoLab/TSL550
