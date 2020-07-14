@@ -8,7 +8,7 @@
 
 import os
 import time
-import visa
+import pyvisa as visa
 
 
 class InstrumentErrorException(Exception):
